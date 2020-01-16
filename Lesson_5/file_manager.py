@@ -41,15 +41,18 @@ def delete_dir_file(name, worked_directory):
 
 def copy_dir(name, worked_directory):
     name_path = os.path.join(worked_directory, name)
+    #print('name_path',name_path)
     if os.path.isdir(name_path):
         shutil.copytree(name_path, name_path + '(copy)')
         print('Папка "{}" успешно скопирована.'.format(name))
     elif os.path.isfile(name_path):
         f_name = os.path.basename(name_path)
+        #print('f_name', f_name)
+        #print('os.path.abspath(name_path)', os.path.abspath(name_path))
         shutil.copyfile(
             name_path,
             os.path.join(
-                os.path.abspath(name_path), f_name[:f_name.index('.')] + '(copy)' + f_name[f_name.index('.'):]
+                worked_directory, f_name[:f_name.index('.')] + '(copy)' + f_name[f_name.index('.'):]
                         ),
             follow_symlinks=True
             )
